@@ -3,7 +3,8 @@ import { dayKey, daysInMonth, monthKey, rupees } from './format'
 
 export function dailyBudget(profile: Profile, date = new Date()): number {
   const spendable = Math.max(0, profile.monthlyIncome - profile.fixedCosts)
-  return spendable / daysInMonth(date)
+  // Whole rupees: "₹3,226 a day" is easier to live by than ₹3,225.81.
+  return Math.floor(spendable / daysInMonth(date))
 }
 
 export function txnsOnDay(txns: Txn[], date: Date | string): Txn[] {
