@@ -6,6 +6,14 @@ export function rupees(n: number): string {
   return `${sign}₹${inr.format(Math.abs(Math.round(n)))}`
 }
 
+const inr2 = new Intl.NumberFormat('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+
+/** ["₹1,976", ".00"] — the paise are drawn smaller and greyed out. */
+export function rupeeParts(n: number): [string, string] {
+  const [whole, frac] = inr2.format(Math.abs(n)).split('.')
+  return [`${n < 0 ? '−' : ''}₹${whole}`, `.${frac}`]
+}
+
 export function dayKey(d: Date | string): string {
   const x = typeof d === 'string' ? new Date(d) : d
   const m = String(x.getMonth() + 1).padStart(2, '0')

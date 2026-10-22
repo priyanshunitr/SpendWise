@@ -8,13 +8,13 @@ export interface Category {
 }
 
 export const CATEGORIES: Record<CategoryId, Category> = {
-  food: { id: 'food', label: 'Food & drink', emoji: '☕', color: '#b6ff3b' },
-  groceries: { id: 'groceries', label: 'Groceries', emoji: '🛒', color: '#3bd6ff' },
-  shopping: { id: 'shopping', label: 'Shopping', emoji: '🛍️', color: '#ff6bd6' },
-  transport: { id: 'transport', label: 'Transport', emoji: '🛵', color: '#ffd23f' },
-  subscriptions: { id: 'subscriptions', label: 'Subscriptions', emoji: '🔁', color: '#8f7bff' },
-  bills: { id: 'bills', label: 'Bills', emoji: '🧾', color: '#ff9f43' },
-  random: { id: 'random', label: 'Random payments', emoji: '🎲', color: '#9aa0b4' },
+  food: { id: 'food', label: 'Food & drink', emoji: '☕', color: '#86c825' },
+  groceries: { id: 'groceries', label: 'Groceries', emoji: '🛒', color: '#38b6f0' },
+  shopping: { id: 'shopping', label: 'Shopping', emoji: '🛍️', color: '#e46ef5' },
+  transport: { id: 'transport', label: 'Transport', emoji: '🛵', color: '#f2b50a' },
+  subscriptions: { id: 'subscriptions', label: 'Subscriptions', emoji: '🔁', color: '#8b85ff' },
+  bills: { id: 'bills', label: 'Bills', emoji: '🧾', color: '#fb8c3c' },
+  random: { id: 'random', label: 'Random payments', emoji: '🎲', color: '#8e8e93' },
 }
 
 export const CATEGORY_LIST = Object.values(CATEGORIES)
