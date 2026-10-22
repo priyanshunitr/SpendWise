@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react'
 import { App } from '@capacitor/app'
+import { Check } from 'lucide-react'
 import { PaymentListener, backfillFromInbox, isNative } from '../lib/native'
 
 interface Status {
@@ -59,10 +60,10 @@ export function AutoDetectSetup({ compact }: { compact?: boolean }) {
   }
 
   return (
-    <div className={`card ${compact ? 'banner morning' : ''}`} style={compact ? { marginBottom: 12 } : undefined}>
-      <div className="eyebrow">Auto-detect payments</div>
+    <div className="notice lavender" style={{ paddingRight: 18 }}>
+      <div className="kicker">Auto-detect payments</div>
       {compact && <h3>Stop typing expenses</h3>}
-      <p className="muted" style={{ fontSize: 14, lineHeight: 1.5, margin: '6px 0 14px' }}>
+      <p style={{ margin: '6px 0 10px' }}>
         Pay at the shop → your bank texts you → SpendWise logs it and today's budget drops. Messages are read on this phone
         only and never uploaded.
       </p>
@@ -70,12 +71,12 @@ export function AutoDetectSetup({ compact }: { compact?: boolean }) {
       <div className="list-row">
         <span>
           <b>Bank SMS</b>
-          <span className="muted"> · main source</span>
+          <span style={{ opacity: 0.6 }}> · main source</span>
         </span>
         {status.sms ? (
-          <span className="tone-good" style={{ fontWeight: 700 }}>
-            On ✓
-          </span>
+          <b style={{ display: 'inline-flex', alignItems: 'center', gap: 4 }}>
+            <Check size={16} /> On
+          </b>
         ) : (
           <button className="chip" aria-pressed="true" onClick={allowSms}>
             Allow
@@ -85,12 +86,12 @@ export function AutoDetectSetup({ compact }: { compact?: boolean }) {
       <div className="list-row">
         <span>
           <b>UPI app notifications</b>
-          <span className="muted"> · backup</span>
+          <span style={{ opacity: 0.6 }}> · backup</span>
         </span>
         {status.notifications ? (
-          <span className="tone-good" style={{ fontWeight: 700 }}>
-            On ✓
-          </span>
+          <b style={{ display: 'inline-flex', alignItems: 'center', gap: 4 }}>
+            <Check size={16} /> On
+          </b>
         ) : (
           <button className="chip" onClick={() => PaymentListener.openNotificationAccessSettings()}>
             Open settings
@@ -104,7 +105,7 @@ export function AutoDetectSetup({ compact }: { compact?: boolean }) {
       )}
 
       {status.sms && !compact && (
-        <button className="btn btn-block" style={{ marginTop: 12 }} onClick={scan} disabled={busy}>
+        <button className="btn btn-dark btn-block" style={{ marginTop: 12 }} onClick={scan} disabled={busy}>
           {busy ? 'Scanning…' : 'Scan last month of SMS'}
         </button>
       )}

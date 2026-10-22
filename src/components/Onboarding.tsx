@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import { actions } from '../lib/store'
-import { daysInMonth, rupees } from '../lib/format'
+import { daysInMonth } from '../lib/format'
 import { demoTxns } from '../lib/demo'
 import { requestNotificationPermission } from '../lib/notify'
+import { Money } from './Money'
 
 export function Onboarding() {
   const [step, setStep] = useState(0)
@@ -31,7 +32,7 @@ export function Onboarding() {
   if (step === 0) {
     return (
       <div className="onboard">
-        <h1 className="display hero-title">
+        <h1 className="hero-title">
           Where did my money <em>go?</em>
         </h1>
         <p className="muted" style={{ fontSize: 17, lineHeight: 1.5, margin: '0 0 32px' }}>
@@ -51,12 +52,12 @@ export function Onboarding() {
 
   return (
     <div className="onboard">
-      <div className="eyebrow" style={{ color: 'var(--lime)', textAlign: 'center' }}>
+      <div className="eyebrow" style={{ textAlign: 'center' }}>
         Monthly income
       </div>
       <div className="ring-wrap">
         <svg viewBox="0 0 220 220" aria-hidden>
-          <circle cx="110" cy="110" r="96" fill="none" stroke="#1d2030" strokeWidth="12" />
+          <circle cx="110" cy="110" r="96" fill="none" stroke="var(--surface-2)" strokeWidth="12" />
           <circle
             cx="110"
             cy="110"
@@ -71,7 +72,7 @@ export function Onboarding() {
             style={{ transition: 'stroke-dashoffset .5s' }}
           />
         </svg>
-        <span className="display">{rupees(incomeN)}</span>
+        <Money value={incomeN} />
       </div>
 
       <label className="field">
@@ -100,8 +101,8 @@ export function Onboarding() {
 
       <div className="per-day">
         <div className="eyebrow">That means</div>
-        <div className="display tone-good" style={{ marginTop: 8 }}>
-          {rupees(perDay)} <small>/ day</small>
+        <div style={{ marginTop: 8 }}>
+          <Money value={perDay} /> <small>/ day</small>
         </div>
         <div className="muted" style={{ fontSize: 13, marginTop: 8 }}>
           every single day this month ({days} days).

@@ -77,7 +77,7 @@ export function AddExpenseSheet({ txn, onClose }: { txn?: Txn; onClose: () => vo
         <div className="chips">
           {CATEGORY_LIST.map((c) => (
             <button key={c.id} className="chip" aria-pressed={cat === c.id} onClick={() => setCategory(c.id)}>
-              {c.emoji} {c.label}
+              {c.label}
             </button>
           ))}
         </div>

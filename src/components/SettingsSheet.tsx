@@ -68,7 +68,7 @@ export function SettingsSheet({ profile, txns, onClose }: { profile: Profile; tx
           }}
           style={{ width: 20, height: 20, accentColor: 'var(--lime)' }}
         />
-        <span style={{ margin: 0, color: 'var(--text)', fontSize: 14 }}>System notifications (while the app is open)</span>
+        <span style={{ margin: 0, color: 'var(--text)', fontSize: 14 }}>Morning &amp; night notifications</span>
       </label>
 
       <button className="btn btn-primary btn-block" onClick={save} disabled={!p.monthlyIncome}>
@@ -79,7 +79,9 @@ export function SettingsSheet({ profile, txns, onClose }: { profile: Profile; tx
         <AutoDetectSetup />
       </div>
 
-      <div className="section-title eyebrow">Data</div>
+      <div className="section-head">
+        <h2>Data</h2>
+      </div>
       <div className="stack">
         {hasDemo ? (
           <button className="btn btn-block" onClick={() => actions.clearDemo()}>

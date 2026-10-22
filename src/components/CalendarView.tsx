@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { dailyBudget, dailyTotals, sum, txnsOnDay } from '../lib/budget'
 import { dayKey, daysInMonth, rupees } from '../lib/format'
 import type { Profile, Txn } from '../lib/types'
+import { Money } from './Money'
 import { TxnRow } from './TxnRow'
 
 function compact(n: number) {
@@ -29,25 +30,30 @@ export function CalendarView({ profile, txns, onEdit }: { profile: Profile; txns
 
   return (
     <>
-      <h2 className="display" style={{ fontSize: 30, margin: '0 4px 4px' }}>
-        {now.toLocaleDateString('en-IN', { month: 'long' })}
-      </h2>
-      <p className="muted" style={{ margin: '0 4px 16px', fontSize: 14 }}>
-        {rupees(budget)} every single day.
+      <header className="head-title">
+        <span />
+        <h1>{now.toLocaleDateString('en-IN', { month: 'long', year: 'numeric' })}</h1>
+        <span />
+      </header>
+
+      <div className="label">Daily budget</div>
+      <Money value={budget} className="money-xl" />
+      <p className="muted" style={{ margin: '6px 0 22px', fontSize: 14 }}>
+        every single day this month.
       </p>
 
       <div className="stats">
-        <div className="card stat">
+        <div className="stat">
           <div className="eyebrow">Under</div>
-          <div className="display tone-good">{under}d</div>
+          <div className="v tone-good">{under} days</div>
         </div>
-        <div className="card stat">
+        <div className="stat">
           <div className="eyebrow">Over</div>
-          <div className="display tone-bad">{past.length - under}d</div>
+          <div className="v tone-bad">{past.length - under} days</div>
         </div>
-        <div className="card stat">
+        <div className="stat">
           <div className="eyebrow">{net >= 0 ? 'Saved' : 'Overspent'}</div>
-          <div className={`display ${net >= 0 ? 'tone-good' : 'tone-bad'}`}>{compact(Math.abs(net))}</div>
+          <div className={`v ${net >= 0 ? 'tone-good' : 'tone-bad'}`}>{compact(Math.abs(net))}</div>
         </div>
       </div>
 
@@ -85,14 +91,14 @@ export function CalendarView({ profile, txns, onEdit }: { profile: Profile; txns
             Within budget
           </span>
           <span>
-            <i style={{ background: 'var(--pink)' }} />
+            <i style={{ background: 'var(--coral)' }} />
             Over budget
           </span>
         </div>
       )}
 
-      <div className="section-title" style={{ display: 'flex', justifyContent: 'space-between' }}>
-        <span className="eyebrow">{selDate.toLocaleDateString('en-IN', { weekday: 'long', day: 'numeric', month: 'short' })}</span>
+      <div className="section-head">
+        <h2>{selDate.toLocaleDateString('en-IN', { weekday: 'long', day: 'numeric', month: 'short' })}</h2>
         <span className={`eyebrow ${selSpent > budget ? 'neg' : ''}`}>
           {rupees(selSpent)} / {rupees(budget)}
         </span>
